@@ -11,6 +11,7 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
         id text default uuid_generate_v4(),
         name text,
         description text,
+        price float,
         created_at timestamp default (timezone('utc', now())),
         updated_at timestamp default (timezone('utc', now())),
         primary key (id)
@@ -37,26 +38,23 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
     );
 
     await sequelize.query(
-      `create or replace function weird_salads.recipes_is_available(recipe weird_salads.recipes) returns boolean as $$
-        declare
-          missing_ingredient_count integer;
-          ingredient_count integer;
-        begin
-          select count(i.id)
-          into ingredient_count
-          from weird_salads.ingredients i join weird_salads.recipe_ingredients ri
-          on i.id = ri.ingredient_id
-          where ri.recipe_id = recipe.id;
+      `create or replace function weird_salads.recipes_max_available(recipe weird_salads.recipes)
+        returns int as $$
+          declare
+            max_orders int;
+          begin
+            select min(i.available_quantity / ri.quantity) into max_orders
+            from recipe_ingredients ri
+            join ingredients i on ri.ingredient_id = i.id
+            where ri.recipe_id = recipe_id;
 
-          select count(i.id)
-          into missing_ingredient_count
-          from weird_salads.ingredients i left join weird_salads.recipe_ingredients ri
-          on i.id = ri.ingredient_id
-          where ri.recipe_id = recipe.id and i.available_quantity < ri.quantity;
-
-          return missing_ingredient_count = 0 and ingredient_count > 0;
-        end
-      $$ language 'plpgsql' STABLE;
+            if max_orders is null then
+                return 0;
+            else
+                return max_orders;
+            end if;
+          end;
+        $$ language plpgsql stable;
     `,
       { transaction }
     );
@@ -78,7 +76,7 @@ export const down = async ({ context }: MigrationParams<QueryInterface>) => {
     );
 
     await sequelize.query(
-      "drop function weird_salads.recipes_is_available(recipe weird_salads.recipes)",
+      "drop function weird_salads.recipes_max_available(recipe weird_salads.recipes)",
       { transaction }
     );
   });
