@@ -5,16 +5,12 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
   const { sequelize } = context;
 
   await sequelize.transaction(async (transaction) => {
-    await sequelize.query('create extension if not exists "uuid-ossp"', {
-      transaction,
-    });
-
     await context.createSchema("weird_salads", { transaction });
 
     await sequelize.query(
       `
       create table weird_salads.ingredients (
-        id text default uuid_generate_v4(),
+        id serial,
         name text,
         unit text,
         cost float,

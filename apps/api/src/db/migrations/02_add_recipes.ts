@@ -8,7 +8,7 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
     await sequelize.query(
       `
       create table weird_salads.recipes (
-        id text default uuid_generate_v4(),
+        id serial,
         name text,
         description text,
         price float,
@@ -28,8 +28,8 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
     await sequelize.query(
       `
       create table weird_salads.recipe_ingredients (
-        recipe_id text references weird_salads.recipes(id),
-        ingredient_id text references weird_salads.ingredients(id),
+        recipe_id integer references weird_salads.recipes(id),
+        ingredient_id integer references weird_salads.ingredients(id),
         quantity float,
         primary key (recipe_id, ingredient_id)
       )
