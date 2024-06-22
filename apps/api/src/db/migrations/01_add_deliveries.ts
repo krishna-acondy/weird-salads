@@ -73,5 +73,15 @@ export const down = async ({ context }: MigrationParams<QueryInterface>) => {
       { tableName: "delivery_ingredients", schema: "weird_salads" },
       { transaction }
     );
+
+    await context.dropTrigger(
+      "weird_salads.delivery_ingredients",
+      "weird_salads_accept_delivery_trigger",
+      { transaction }
+    );
+
+    await context.dropFunction("weird_salads_ingredients_accept_delivery", [], {
+      transaction,
+    });
   });
 };
