@@ -1,13 +1,14 @@
 import { postgraphile } from "postgraphile";
 import PostGraphileConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
+import PostGraphileBulkCreatePlugin from "postgraphile-plugin-many-create-update-delete";
 
 type ConnectionInfo = {
-  database: string
-  user: string
-  password: string
-  host: string
-  port: number
-}
+  database: string;
+  user: string;
+  password: string;
+  host: string;
+  port: number;
+};
 
 export default (connectionInfo: ConnectionInfo) =>
   postgraphile(
@@ -20,7 +21,8 @@ export default (connectionInfo: ConnectionInfo) =>
       graphiql: true,
       enhanceGraphiql: true,
       appendPlugins: [
-        PostGraphileConnectionFilterPlugin
-      ]
+        PostGraphileConnectionFilterPlugin,
+        PostGraphileBulkCreatePlugin,
+      ],
     }
   );
