@@ -1,20 +1,10 @@
 version: "3"
 
 services:
-  web:
-    container_name: web
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-    restart: always
-    ports:
-      - 3000:8080
-    networks:
-      - weird_salads
   postgresdb:
     image: postgres
     restart: unless-stopped
-    env_file: ./.env.local
+    env_file: ./.env
     environment:
       - POSTGRES_DB=$DATABASE
       - POSTGRES_USER=$PG_USER
@@ -23,13 +13,8 @@ services:
       - $PG_PORT:5432
     volumes:
       - db:/var/lib/postgres
-    networks:
-      - weird_salads
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
-networks:
-  weird_salads:
-    external: true
 volumes:
   db:
