@@ -1,0 +1,35 @@
+name: CI & CD
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'doc/**'
+      - '**/*.md'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'doc/**'
+      - '**/*.md'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'yarn'
+          node-version: 18
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        env:
+        run: yarn build
