@@ -2,11 +2,16 @@ FROM node:18-alpine AS base
 
 FROM base AS builder
 RUN apk update
-
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
-RUN turbo prune web --docker
+
+# Copy entrypoint script
+COPY /apps/api/entrypoint.sh /app/apps/api/entrypoint.sh
+
+# Make the entrypoint script executable
+RUN chmod +x /app/apps/api/entrypoint.sh
+RUN turbo prune api --docker
 
 FROM base AS installer
 RUN apk update
@@ -21,24 +26,15 @@ RUN yarn install
 # Build
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
-RUN yarn turbo build --filter=web...
+
+RUN yarn turbo build --filter=api...
 
 FROM base AS runner
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 app
-USER app
+RUN addgroup --system --gid 1001 expressjs
+RUN adduser --system --uid 1001 expressjs
+USER expressjs
+COPY --from=installer /app .
 
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/
-
-RUN rm -rf html
-RUN mkdir html
-
-WORKDIR /
-
-COPY --from=builder /app/apps/web/nginx.conf /etc/nginx
-COPY --from=builder /app/apps/web/dist/ /usr/share/nginx/html
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/app/apps/api/entrypoint.sh"]
