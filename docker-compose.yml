@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+    restart: always
+    ports:
+      - 3000:8080
+    networks:
+      - weird_salads
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  weird_salads:
+    external: true
