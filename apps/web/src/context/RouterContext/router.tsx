@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import AppContext from "../AppContext";
 
 import AppShell from "./AppShell";
-import { NewOrder, OrderList, Orders } from "../../pages/Orders";
+import { NewOrder, Orders, OrdersPage } from "../../pages/Orders";
 import { Inventory, Ingredients, Deliveries } from "../../pages/Inventory";
 import { Menu } from "../../features/menu/components/Menu";
 
@@ -21,10 +21,10 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/orders",
-            element: <Orders />,
+            element: <OrdersPage />,
             children: [
               { index: true, element: <Navigate to="list" /> },
-              { path: "list", element: <OrderList /> },
+              { path: "list", element: <Orders /> },
               { path: "new", element: <NewOrder /> },
             ],
           },
