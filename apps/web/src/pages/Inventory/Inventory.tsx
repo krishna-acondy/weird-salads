@@ -19,7 +19,7 @@ const items = [
 ];
 export function Inventory() {
   return (
-    <Stack>
+    <Stack width="100%">
       <Nav items={items} />
       <Outlet />
     </Stack>
