@@ -29,17 +29,17 @@ const exchanges = [
   cacheExchange({
     updates: {
       Mutation: {
-        createDelivery(result, args, cache) {
+        createDelivery(_result, _args, cache) {
           invalidateField("allDeliveries", cache);
         },
-        createOrder(result, args, cache) {
+        createOrder(_result, _args, cache) {
           invalidateField("allOrders", cache);
         },
-        mnCreateDeliveryIngredient(result, args, cache) {
+        mnCreateDeliveryIngredient(_result, _args, cache) {
           invalidateField("allDeliveries", cache);
           invalidateField("allIngredients", cache);
         },
-        mnCreateOrderRecipe(result, args, cache) {
+        mnCreateOrderRecipe(_result, _args, cache) {
           invalidateField("allOrders", cache);
           invalidateField("allRecipes", cache);
         },
