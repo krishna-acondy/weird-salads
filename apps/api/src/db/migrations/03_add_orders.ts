@@ -27,6 +27,7 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
       create table weird_salads.order_recipes (
         order_id integer references weird_salads.orders(id),
         recipe_id integer references weird_salads.recipes(id),
+        quantity integer not null,
         primary key (order_id, recipe_id)
       )
     `,
@@ -54,7 +55,7 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
             where ri.recipe_id = new.recipe_id
         loop
             update weird_salads.ingredients
-            set available_quantity = available_quantity - ingredient.quantity
+            set available_quantity = available_quantity - (ingredient.quantity * new.quantity)
             where id = ingredient.ingredient_id;
         end loop;
 

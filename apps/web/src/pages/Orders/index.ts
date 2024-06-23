@@ -1,3 +1,3 @@
 export * from "./NewOrder";
-export * from "./OrderList";
 export * from "./Orders";
+export * from "./OrdersPage";
