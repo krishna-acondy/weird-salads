@@ -61,3 +61,33 @@ You can use `tsx` to run it from the `apps/api` folder like so:
 ```
     npx tsx@latest ./src/data-loader/loader.ts
 ```
+
+## Feature overview
+I've prioritised features that will help the restaurant to start using the new system ASAP.
+There's enough to enable day-to-day functioning with better tracking compared to a spreadsheet.
+We can eventually build out more reporting and analytics as we go along.
+
+Creating ingredients hasn't been implement in the app due to time constraints - it is however possible to import ingredients from a CSV file.
+
+**Feature**|**App**|**API**
+:-----:|:-----:|:-----:
+Create deliveries|✅|✅
+Accept ingredients in delivery|✅|✅
+Create ingredients|❌|✅
+Automatically update stock|✅|✅
+View all deliveries and costs|✅|✅
+Sell items|✅|✅
+View available stock on menu|✅|✅
+Stock taking/waste recording|❌|✅
+Reporting|❌|🟡
+Data migration|❌|✅
+
+## To do
+### Hygiene
+- [ ] i18n
+- [ ] Better responsiveness for smaller screens
+- [ ] Unit tests
+- [ ] One script to start up the dev environment
+### Features
+- [ ] Create ingredients
+- [ ] Charts for orders and stock over time
