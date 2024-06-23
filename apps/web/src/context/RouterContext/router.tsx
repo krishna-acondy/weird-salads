@@ -3,7 +3,8 @@ import AppContext from "../AppContext";
 
 import AppShell from "./AppShell";
 import { NewOrder, OrderList, Orders } from "../../pages/Orders";
-import { DeliveryList, Inventory, ItemList } from "../../pages/Inventory";
+import { Inventory, Ingredients, Deliveries } from "../../pages/Inventory";
+import { Menu } from "../../features/menu/components/Menu";
 
 export const router = createBrowserRouter([
   {
@@ -28,12 +29,16 @@ export const router = createBrowserRouter([
             ],
           },
           {
+            path: "/menu",
+            element: <Menu />,
+          },
+          {
             path: "/inventory",
             element: <Inventory />,
             children: [
               { index: true, element: <Navigate to="items" /> },
-              { path: "items", element: <ItemList /> },
-              { path: "deliveries", element: <DeliveryList /> },
+              { path: "items", element: <Ingredients /> },
+              { path: "deliveries", element: <Deliveries /> },
             ],
           },
           { path: "/", element: <Navigate to="/orders" /> },

@@ -35,6 +35,13 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
     );
 
     await sequelize.query(
+      "comment on table weird_salads.delivery_ingredients is E'@mncud'",
+      {
+        transaction,
+      }
+    );
+
+    await sequelize.query(
       `
       create or replace function weird_salads_ingredients_accept_delivery() returns trigger as
         $$
