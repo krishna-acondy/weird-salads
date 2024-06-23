@@ -1,30 +1,17 @@
-# React + TypeScript + Vite
+# Weird Salads Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Weird Salads web app allows users to view available inventory, place orders and receive deliveries for a given restaurant location.
 
-Currently, two official plugins are available:
+The app uses the following technologies:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `vite` for bundling
+- `react-router-dom` for routing
+- `@mui/material` as a design system
+- `urql` to interact with the GraphQL API
 
-## Expanding the ESLint configuration
+# Local development
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Create a `.env` file based on the sample provided.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+You can then run `yarn dev` in the `apps/web` folder to start up the dev server.
+The app will be available at http://localhost:5173.

@@ -44,8 +44,8 @@ export const up = async ({ context }: MigrationParams<QueryInterface>) => {
             max_orders int;
           begin
             select min(i.available_quantity / ri.quantity) into max_orders
-            from recipe_ingredients ri
-            join ingredients i on ri.ingredient_id = i.id
+            from weird_salads.recipe_ingredients ri
+            join weird_salads.ingredients i on ri.ingredient_id = i.id
             where ri.recipe_id = recipe_id;
 
             if max_orders is null then

@@ -11,6 +11,7 @@ COPY /apps/api/entrypoint.sh /app/apps/api/entrypoint.sh
 
 # Make the entrypoint script executable
 RUN chmod +x /app/apps/api/entrypoint.sh
+
 RUN turbo prune api --docker
 
 FROM base AS installer
