@@ -1,4 +1,6 @@
 # Weird Salads
+![CI](https://github.com/krishna-acondy/weird-salads/actions/workflows/ci.yml/badge.svg)
+
 
 Monorepo containing source code for Weird Salads inventory app and API
 
