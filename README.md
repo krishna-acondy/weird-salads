@@ -69,6 +69,8 @@ I've prioritised features that will help the restaurant to start using the new s
 There's enough to enable day-to-day functioning with better tracking compared to a spreadsheet.
 We can eventually build out more reporting and analytics as we go along.
 
+I've focused on building out pieces of the underlying architecture which will allow us to move fast to build new features and capture value in the near future.
+
 Creating ingredients hasn't been implement in the app due to time constraints - it is however possible to import ingredients from a CSV file.
 
 **Feature**|**App**|**API**
