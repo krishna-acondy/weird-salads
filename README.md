@@ -71,6 +71,10 @@ We can eventually build out more reporting and analytics as we go along.
 
 I've focused on building out pieces of the underlying architecture which will allow us to move fast to build new features and capture value in the near future.
 
+![image](https://github.com/krishna-acondy/weird-salads/assets/2980428/320516c0-313b-4539-af5d-7cdab5c4d047)
+(Image from [Ashby HQ](https://www.ashbyhq.com/blog/culture/ashbys-operating-principles#6---optimize-for-the-long-term,-but-move-with-urgency))
+
+
 Creating ingredients hasn't been implement in the app due to time constraints - it is however possible to import ingredients from a CSV file.
 
 **Feature**|**App**|**API**
