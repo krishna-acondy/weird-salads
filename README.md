@@ -83,9 +83,12 @@ View available stock on menu|✅|✅
 Stock taking/waste recording|❌|✅
 Reporting|❌|🟡
 Data migration|❌|✅
+Waste tracking|❌|❌
+Inventory change audit|❌|❌
 
 ## To do
 ### Hygiene
+- [ ] Auth
 - [ ] i18n
 - [ ] Better responsiveness for smaller screens
 - [ ] Unit tests
